@@ -132,13 +132,13 @@ but there is also a risk in becoming too dependent on `ts-proto`.
 
 Only one package needs to be installed:
 ```shell
-npm install ts-code
+npm install -D ts-proto
 ```
 The generator is passed as plugin to `protoc`.
 It provides a wealth of extra options, including one that generates gRPC service definitions and stubs:
 
 ```shell
-protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. --ts_proto_opt=outputServices=grpc-js hello.proto
+protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. --ts_proto_opt=outputServices=grpc-js --proto_path=.. hello.proto
 ```
 All code is written to one idiomatic Typescript file.
 

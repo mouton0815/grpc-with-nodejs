@@ -6,3 +6,6 @@ package-lock.json
 *_pb.js
 *_pb.d.ts
 typed/client.js
+modern/client.js
+modern/hello.ts
+modern/hello.js

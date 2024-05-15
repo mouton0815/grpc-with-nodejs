@@ -1,0 +1,17 @@
+{
+  "name": "gprc-with-nodejs-modern",
+  "version": "1.0.0",
+  "description": "Native TypeScript Generation with ts-proto",
+  "scripts": {
+    "start": "node client.js",
+    "build": "npm run generate && tsc client.ts",
+    "generate": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. --ts_proto_opt=outputServices=grpc-js --proto_path=.. hello.proto"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.7"
+  },
+  "devDependencies": {
+    "ts-proto": "^1.175.1",
+    "typescript": "^5.4.5"
+  }
+}
