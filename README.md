@@ -1,5 +1,6 @@
 # gRPC with Node.js
-TODO: `protoc` installation (there might be variants) 
+((TODO: `protoc` installation (there might be variants)))
+((TODO: Say that only client-stub examples are shown, but that the GitHub repo also shows the servers))
 
 Before I discovered [ts-proto](https://github.com/stephenh/ts-proto) for JavaScript code generation,
 I tried a number of other approaches found in the official documentation and in articles:
@@ -73,13 +74,10 @@ client.sayHello(request, (error, response) => {
     console.log(error ? error.message : response.getMessage())
 })
 ```
-
 In order to build and run the client, another dependency must be added to your project:
 ```shell
 npm add google-protobuf
 ```
-((TODO: Is `google-protobuf` required for all variants? Then move it up!))
-
 An escape from downgrading an entire project to CommonJS is using a preprocessor. 
 A TypeScript compiler is one possible preprocessor. 
 This is the approach chosen in article [Creating a gRPC server and client with Node.js and TypeScript](https://medium.com/nerd-for-tech/creating-a-grpc-server-and-client-with-node-js-and-typescript-bb804829fada).
