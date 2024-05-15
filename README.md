@@ -1,4 +1,15 @@
 # gRPC with Node.js
+## Four Ways of Integrating gRPC into your Node.js Project
+When I first started using gRPC for Node.js, I quickly became very confused.
+There seemed to be a plethora of ways to integrate gRPC into clients and servers,
+and every article I read suggested a slightly different approach.
+Moreover, some of the approaches did not work at first, sometimes because of a missing flag,
+sometimes because I confused local and global installations. I was pretty demotivated.
+
+Later I tried to approach the matter more systematically.
+The more I understood, the more I wanted to write a short blog post about my findings.
+And here it is.
+
 ((TODO: `protoc` installation (there might be variants)))
 ((TODO: Say that only client-stub examples are shown, but that the GitHub repo also shows the servers))
 
