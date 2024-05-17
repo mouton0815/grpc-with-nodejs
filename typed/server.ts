@@ -1,16 +1,15 @@
-import { Server, ServerCredentials } from '@grpc/grpc-js'
+import { sendUnaryData, Server, ServerCredentials, ServerUnaryCall } from '@grpc/grpc-js'
 import { GreeterService } from './hello_grpc_pb'
-import { HelloReply } from './hello_pb'
+import { HelloReply, HelloRequest } from './hello_pb'
 
-function sayHello(call, callback) {
+function sayHello(call: ServerUnaryCall<HelloRequest, HelloReply>, callback: sendUnaryData<HelloReply>) {
     const reply = new HelloReply()
     reply.setMessage('Hello ' + call.request.getName())
     callback(null, reply)
 }
 
-const address = '0.0.0.0:5005'
 const server = new Server()
 server.addService(GreeterService, { sayHello })
-server.bindAsync(address, ServerCredentials.createInsecure(), () => {
-    console.log('Server listening at', address)
+server.bindAsync('0.0.0.0:5005', ServerCredentials.createInsecure(), (error, port) => {
+    console.log(error ? error.message : 'Server listening on port ' + port)
 })
