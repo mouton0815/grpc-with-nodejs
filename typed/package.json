@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "TypeScript signature generation with protoc-gen-grpc",
   "scripts": {
-    "start": "node client.js",
-    "build": "npm run generate && tsc client.ts",
+    "build": "npm run generate && tsc client.ts server.ts",
     "generate": "npm run gen-js && npm run gen-ts",
     "gen-js": "protoc-gen-grpc --js_out=import_style=commonjs,binary:. --grpc_out=grpc_js:. --proto_path=.. hello.proto",
-    "gen-ts": "protoc-gen-grpc-ts --ts_out=grpc_js:. --proto_path=.. hello.proto"
+    "gen-ts": "protoc-gen-grpc-ts --ts_out=grpc_js:. --proto_path=.. hello.proto",
+    "client": "node client.js",
+    "server": "node server.js"
+
   },
   "devDependencies": {
     "protoc-gen-grpc": "^2.0.4",
