@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Static code generation with grpc-tools",
   "scripts": {
+    "build": "npm run generate",
     "generate": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:. --grpc_out=grpc_js:. --proto_path=.. hello.proto",
-    "start": "node client.js"
+    "client": "node client.js",
+    "server": "node server.js"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.7",

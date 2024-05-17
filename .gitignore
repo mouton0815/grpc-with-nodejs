@@ -5,7 +5,7 @@ package-lock.json
 # Generated files
 *_pb.js
 *_pb.d.ts
-typed/client.js
+typed/*.js
 modern/client.js
 modern/hello.ts
 modern/hello.js

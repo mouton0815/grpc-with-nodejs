@@ -9,7 +9,6 @@
     "gen-ts": "protoc-gen-grpc-ts --ts_out=grpc_js:. --proto_path=.. hello.proto",
     "client": "node client.js",
     "server": "node server.js"
-
   },
   "devDependencies": {
     "protoc-gen-grpc": "^2.0.4",
