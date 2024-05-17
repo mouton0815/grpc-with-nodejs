@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Native TypeScript Generation with ts-proto",
   "scripts": {
-    "start": "node client.js",
-    "build": "npm run generate && tsc client.ts",
-    "generate": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. --ts_proto_opt=outputServices=grpc-js --proto_path=.. hello.proto"
+    "build": "npm run generate && tsc client.ts server.ts",
+    "generate": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. --ts_proto_opt=outputServices=grpc-js --proto_path=.. hello.proto",
+    "client": "node client.js",
+    "server": "node server.js"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.7"
