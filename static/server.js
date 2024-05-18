@@ -8,9 +8,8 @@ function sayHello(call, callback) {
     callback(null, reply)
 }
 
-const address = '0.0.0.0:5005'
 const server = new Server()
 server.addService(GreeterService, { sayHello })
-server.bindAsync(address, ServerCredentials.createInsecure(), () => {
-    console.log('Server listening at', address)
+server.bindAsync('0.0.0.0:5005', ServerCredentials.createInsecure(), (error, port) => {
+    console.log(error ? error.message : 'Server listening on port ' + port)
 })
