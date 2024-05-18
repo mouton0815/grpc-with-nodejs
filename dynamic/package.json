@@ -1,0 +1,13 @@
+{
+  "name": "gprc-with-nodejs-dynamic",
+  "version": "1.0.0",
+  "description": "Static code generation with grpc-tools",
+  "scripts": {
+    "client": "node client.js",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.8",
+    "@grpc/proto-loader": "^0.7.13"
+  }
+}
