@@ -1,5 +1,7 @@
-# gRPC with Node.js
+<img src="grpc-at-node.png" alt="gRCP@Node.js" style="width:600px;"/>
+
 ## Four Ways of Integrating gRPC into your Node.js Project
+
 When I first started using gRPC for Node.js, I quickly became very confused.
 There seemed to be a plethora of ways to integrate gRPC into clients and servers,
 and every article I read suggested a slightly different approach.
@@ -24,9 +26,11 @@ This approach is also used in several articles, such as
 [How to Build Your First Node.js gRPC API](https://www.trendmicro.com/en_us/devops/22/f/grpc-api-tutorial.html).
 
 ```shell
-nom install @grpc/grpc-js @grpc/proto-loader
+npm install @grpc/grpc-js @grpc/proto-loader
 ```
 ((TODO: Code example?))
+((TODO: Disadvantage: No type support. But types can be generated.))
+
 
 However, I didn't want to have my skeletons and stubs to be auto-generated,
 because I wanted a dedicated code-generation step, clearly separated from actual code usage.
@@ -63,12 +67,12 @@ The compiler call simplifies to:
 ```shell
 npx grpc_tools_node_protoc --js_out=import_style=commonjs,binary:. --grpc_out=grpc_js:. --proto_path=.. hello.proto 
 ```
-`protoc` can output code that uses either closure-style or CommonJS-style imports (as used in the calls above).
-The [project page](https://github.com/protocolbuffers/protobuf-javascript) states that
+The compiler can output code that uses either closure-style or CommonJS-style imports (as used in the calls above).
+Unfortunately, the [project page](https://github.com/protocolbuffers/protobuf-javascript) states that
 > Support for ES6-style imports is not implemented yet.
 
 This leads to generated code that is hard to read for users of modern JavaScript.
-Moreover, the generated CommonJS code cannot be easily combined with ([ECMAScript modules](https://nodejs.org/api/esm.html)
+Moreover, the generated CommonJS code cannot be easily combined with [ECMAScript modules](https://nodejs.org/api/esm.html)
 (i.e. projects specified as `"type": "module"` in the `package.json`).
 For this reason, the example client below also uses the CommonJS format:
 
@@ -114,15 +118,15 @@ npx protoc-gen-grpc-ts --ts_out=grpc_js:. --proto_path=.. hello.proto
 ```
 This simplifies the integration of the generated code into TypeScript clients:
 ```typescript
-import { credentials } from '@grpc/grpc-js'
+import { credentials, ServiceError } from '@grpc/grpc-js'
 import { GreeterClient } from './hello_grpc_pb'
-import { HelloRequest } from './hello_pb'
+import { HelloReply, HelloRequest } from './hello_pb'
 
 const client = new GreeterClient('localhost:5005', credentials.createInsecure())
 const request = new HelloRequest()
 request.setName('Hans')
 
-client.sayHello(request, (error, response) => {
+client.sayHello(request, (error : ServiceError, response : HelloReply) => {
     console.log(error ? error.message : response.getMessage())
 })
 ```
@@ -153,13 +157,13 @@ All code is written to one idiomatic Typescript file.
 
 The corresponding integration into code is even simpler as in the example above (note the `create` factory):
 ```typescript
-import { credentials } from '@grpc/grpc-js'
-import { GreeterClient, HelloRequest } from './hello'
+import { credentials, ServiceError } from '@grpc/grpc-js'
+import { GreeterClient, HelloReply, HelloRequest } from './hello'
 
 const client = new GreeterClient('localhost:5005', credentials.createInsecure())
 const request = HelloRequest.create({ name: 'Hans' })
 
-client.sayHello(request, (error, response) => {
+client.sayHello(request, (error : ServiceError, response : HelloReply) => {
     console.log(error ? error.message : response.message)
 })
 ```
